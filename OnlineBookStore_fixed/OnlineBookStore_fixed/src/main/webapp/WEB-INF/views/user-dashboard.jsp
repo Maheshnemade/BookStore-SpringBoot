@@ -168,6 +168,12 @@
 					</td>
 
 			    </tr>
+				<td>
+				    <a href="/books/${book.bookId}" class="btn btn-outline-info">
+				        <i class="fas fa-info-circle"></i> View Details
+				    </a>
+				</td>
+
 			</c:forEach>
         </table>
     </div>
