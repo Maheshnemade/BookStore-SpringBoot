@@ -47,7 +47,7 @@
         <h2>No Results Found</h2>
         <p>Sorry, we couldn't find any matching results.</p>
 		<br>
-		<a href="/user/dashboard">Go To Home Page</a>
+		<a href="/admin/dashboard">Go To Home Page</a>
     </div>
 
 </body>
