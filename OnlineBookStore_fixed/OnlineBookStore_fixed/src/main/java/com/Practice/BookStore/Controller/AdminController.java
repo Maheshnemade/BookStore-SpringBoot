@@ -1,14 +1,18 @@
 package com.Practice.BookStore.Controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.Practice.BookStore.Entity.Role;
 import com.Practice.BookStore.Entity.Users;
 import com.Practice.BookStore.Repo.BookRepository;
+import com.Practice.BookStore.Repo.CartRepository;
 import com.Practice.BookStore.Repo.UsersRepository;
 
 @Controller
@@ -17,6 +21,9 @@ public class AdminController {
 
     @Autowired
     private BookRepository bookRepository;
+    
+    @Autowired
+    private CartRepository cartRepository;
 
     @Autowired
     private UsersRepository usersRepository;
@@ -48,21 +55,32 @@ public class AdminController {
     @GetMapping("/users")
     public String showAllUsers(Model model) {
         model.addAttribute("users", usersRepository.findAll());
+        model.addAttribute("totalAdmins", usersRepository.countByRole(Role.ADMIN));
         return "admin-users"; // admin-users.jsp
     }
 
+    @Transactional
     @PostMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
-        long adminCount = usersRepository.countByRole(Role.ADMIN);
+        Optional<Users> userToDelete = usersRepository.findById(id);
+        if (userToDelete.isPresent()) {
+            Users user = userToDelete.get();
 
-        // Prevent deleting the last admin
-        if (adminCount <= 1) {
-            return "redirect:/admin/users?error=lastAdmin"; // Show warning
+            // Only prevent deletion if this user is an ADMIN and the last one
+            if (user.getRole() == Role.ADMIN) {
+                long adminCount = usersRepository.countByRole(Role.ADMIN);
+                if (adminCount <= 1) {
+                    return "redirect:/admin/users?error=lastAdmin";
+                }
+            }
+            cartRepository.deleteByUser(user);
+            // Proceed with delete
+            usersRepository.deleteById(id);
         }
 
-        usersRepository.deleteById(id);
         return "redirect:/admin/users";
     }
+
 
     // Show Admin Registration Page
     @GetMapping("/register")
