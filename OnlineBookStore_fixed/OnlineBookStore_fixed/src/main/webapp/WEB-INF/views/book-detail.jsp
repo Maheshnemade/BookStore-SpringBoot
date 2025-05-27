@@ -100,6 +100,7 @@
 		    <input type="hidden" name="bookId" value="${book.bookId}">
 		    <input type="hidden" id="userId" name="userId" value="${userId}">
 		    <button type="submit" class="btn-add-to-cart">Add to Cart</button>
+			<a href="/admin/dashboard" class="btn btn-secondary mt-3">← Back to Dashboard</a>
 		</form>
 
 		<script>
