@@ -1,5 +1,6 @@
 package com.Practice.BookStore.Configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,15 +9,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.Practice.BookStore.Service.CustomUserDetailsService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+	@Autowired
+	private CustomUserDetailsService customUserDetailsService;
+	
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http 
+        .userDetailsService(customUserDetailsService) 
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/books/**", "/index", "/register", "/password-reset", "/doLogin", "/redirect-after-login","/WEB-INF/views/**").permitAll()
+                .requestMatchers("/books/**", "/index", "/register", "/password-reset", "/redirect-after-login","/WEB-INF/views/**").permitAll()
                 .requestMatchers("/login").permitAll() // ✅ Ensure login page is accessible
                 .requestMatchers("/cart/add", "/cart/view", "/cart/update", "/cart/remove", "/cart/clear").hasRole("USER") 
                 .requestMatchers("/WEB-INF/**").denyAll() // ❌ Prevent direct access to JSP files

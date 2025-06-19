@@ -35,7 +35,7 @@ public class AdminController {
     public String showAdminDashboard(Model model) {
         model.addAttribute("books", bookRepository.findAll());
         model.addAttribute("users", usersRepository.findAll());
-        return "admin-dashboard"; // admin-dashboard.jsp
+        return "admin-dashboard"; // admin-dashboard.jsp 
     }
     @GetMapping("/analytics")
     public String showAnalytics(Model model) {

@@ -33,17 +33,6 @@ public class AuthController {
         model.addAttribute("error", error);
         return "login"; // ✅ Loads login.jsp
     }
-    @PostMapping("/doLogin")
-    public String doLogin(@RequestParam String username, @RequestParam String password, HttpSession session) {
-        Users user = usersRepository.findByUsername(username).orElse(null);
-
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            session.setAttribute("userId", user.getUserId()); // ✅ Store userId in session
-            session.setAttribute("username", user.getUsername()); // ✅ Store username in session
-            return "redirect:/user/dashboard";
-        }
-        return "redirect:/login?error=invalid";
-    }
     @GetMapping("/logout")
     public String logout() {
         return "index"; // Redirect to login page after logout

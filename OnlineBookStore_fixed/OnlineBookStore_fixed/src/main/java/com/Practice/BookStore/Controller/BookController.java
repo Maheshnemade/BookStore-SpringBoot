@@ -59,7 +59,7 @@ public class BookController {
         return "book-detail"; // ✅ Load book-details.jsp
     }
 
-    // Show book list for admin
+    // Show book list for admin 
     @GetMapping("/admin/books")
     public String showBooksForAdmin(Model model) {
         model.addAttribute("books", bookRepository.findAll());
