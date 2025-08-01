@@ -1,64 +1,78 @@
-📚 Online Book Store Management System
-This is a full-stack Java web application built using Spring Boot. It supports role-based access for users and admins, allowing users to browse and add books to their cart, and admins to manage books and users through a secure dashboard.
+## 📚 Online Book Store Management System
 
-🎯 Features
-👤 User
-Register with name, email, mobile number, password
+This is a full-stack Java web application built using **Spring Boot**. It supports **role-based access** for users and admins — allowing users to browse and add books to their cart, and admins to manage books and users through a secure dashboard.
 
-Login and view personalized user dashboard
+---
 
-Browse available books with details (title, author, publisher, price)
+### 🎯 Features
 
-Add books to cart and manage cart items
+#### 👤 User
 
-View and remove books from cart
+- Register with name, email, mobile number, password  
+- Login and view personalized user dashboard  
+- Browse available books with details: title, author, publisher, price  
+- Add books to cart and manage cart items  
+- View and remove books from cart  
 
-🛠️ Admin
-Secure login
+#### 🛠️ Admin
 
-Admin dashboard with total books and users count
+- Secure login  
+- Admin dashboard showing total books and total users  
+- Add new books (title, author, publisher, price)  
+- Edit and delete existing books  
+- View registered users and delete if needed  
+- Search books and users  
+- Register new admin accounts  
 
-Add new books with fields: title, author, publisher, price
+---
 
-Edit and delete existing books
+### 🧱 Tech Stack
 
-View registered users and delete users if needed
+- Java 17  
+- Spring Boot (MVC, Spring Security)  
+- Hibernate, JPA  
+- JSP, JSTL, HTML, CSS, Bootstrap  
+- MySQL  
+- Maven, Embedded Tomcat  
 
-Search books and users
+---
 
-Register new admin
+### 📁 Project Structure
 
-🧱 Tech Stack
-Java 17, Spring Boot (MVC, Security)
+```
+controller/      -> Spring MVC Controllers  
+model/           -> Entity classes (User, Book, Cart)  
+repository/      -> Spring Data JPA Repositories  
+service/         -> Business logic layer  
+config/          -> Spring Security Configuration  
+WEB-INF/jsp/     -> JSP views (login, dashboard, cart, admin pages)  
+```
 
-Hibernate, JPA
+---
 
-JSP, JSTL, HTML, CSS, Bootstrap
+### 🗃️ Database
 
-MySQL
+Make sure you have a MySQL database named:
 
-Maven, Embedded Tomcat
+```
+bookstore_db
+```
 
-📁 Project Structure
-rust
-Copy
-Edit
-controller/      -> Spring MVC Controllers
-model/           -> Entity classes (User, Book, Cart)
-repository/      -> Spring Data JPA Repositories
-service/         -> Service layer (Business logic)
-config/          -> Security Configuration
-WEB-INF/jsp/     -> JSP views (login, dashboard, cart, admin pages)
-🗃️ Database
-Ensure you have a MySQL database named bookstore_db.
+Update your `application.properties` file with your database credentials:
 
-Update your application.properties file with your own database credentials
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/bookstore_db  
+spring.datasource.username=your_username  
+spring.datasource.password=your_password  
+spring.jpa.hibernate.ddl-auto=update  
+```
 
-🚀 Future Enhancements (Planned)
-Implement Buy/Checkout functionality from cart
+---
 
-Add payment integration
+### 🚀 Future Enhancements (Planned)
 
-Export purchase receipts
-
-Book ratings and reviews by users
+- Implement Buy/Checkout functionality from the cart  
+- Add payment integration (e.g., Razorpay, Stripe)  
+- Export purchase receipts (PDF format)  
+- Allow book ratings and reviews by users  
+- Integrate an AI chatbot for book recommendations and queries  
