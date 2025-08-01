@@ -71,8 +71,6 @@ spring.jpa.hibernate.ddl-auto=update
 
 ### 🚀 Future Enhancements (Planned)
 
-- Implement Buy/Checkout functionality from the cart  
-- Add payment integration (e.g., Razorpay, Stripe)  
-- Export purchase receipts (PDF format)  
+- Implement Buy/Checkout functionality from the cart   
 - Allow book ratings and reviews by users  
 - Integrate an AI chatbot for book recommendations and queries  
